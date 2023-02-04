@@ -2,14 +2,13 @@ from flask import Flask, jsonify, request,json
 from config import db, SECRET_KEY
 from os import environ
 from user import USER
-
+app=Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"]=environ.get('DB_URI')
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_ECHO"] = False
+app.secret_key = SECRET_KEY
+db.init_app(app)
 def create_app():
-    app=Flask(__name__)
-    app.config["SQLALCHEMY_DATABASE_URI"]=environ.get('DB_URI')
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.config["SQLALCHEMY_ECHO"] = False
-    app.secret_key = SECRET_KEY
-    db.init_app(app)
     with app.app_context():
         @app.route('/add_user', methods=['POST'])
         def add_user():
