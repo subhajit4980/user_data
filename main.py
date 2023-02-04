@@ -10,6 +10,9 @@ app.secret_key = SECRET_KEY
 db.init_app(app)
 def create_app():
     with app.app_context():
+        @app.route('/')
+        def index():
+            return jsonify(name="subhajit")
         @app.route('/add_user', methods=['POST'])
         def add_user():
             data = request.form.to_dict(flat=True)
