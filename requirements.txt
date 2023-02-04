@@ -13,3 +13,4 @@ SQLAlchemy==1.4.46
 Werkzeug==2.2.2
 zope.interface==5.5.2
 python-dotenv== 0.21.1
+psycopg2-binary==2.9.5
